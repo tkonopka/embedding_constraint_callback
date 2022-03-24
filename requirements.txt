@@ -1,0 +1,8 @@
+numpy
+pandas
+torch
+pytorch-lightning
+jupyter
+jupyterlab
+matplotlib
+seaborn

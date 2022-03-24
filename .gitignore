@@ -1,0 +1,13 @@
+# local development
+.idea
+venv
+
+# locally-produced files
+.ipynb_checkpoints
+*/.ipynb_checkpoints
+*__pycache__*
+*pyc
+
+# logs
+lightning_logs
+*/lightning_logs
