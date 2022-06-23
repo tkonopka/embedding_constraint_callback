@@ -19,8 +19,10 @@ Callback class that fixes a portion of an Embedding
 import torch
 import torch.nn as nn
 import pytorch_lightning as pl
+from typing import Any
 from pytorch_lightning.callbacks.base import Callback
 from pytorch_lightning.utilities.exceptions import MisconfigurationException
+from pytorch_lightning.utilities.types import STEP_OUTPUT
 
 
 class EmbeddingConstraint(Callback):
@@ -55,8 +57,11 @@ class EmbeddingConstraint(Callback):
         self.embedding.weight[:n] = self.constraint
         self.embedding.weight.requires_grad = requires_grad
 
-    def on_batch_end(self,
-                     trainer: "pl.Trainer",
-                     pl_module: "pl.LightningModule") -> None:
+    def on_train_batch_end(self,
+                           trainer: "pl.Trainer",
+                           pl_module: "pl.LightningModule",
+                           outputs: STEP_OUTPUT,
+                           batch: Any,
+                           batch_idx: int) -> None:
         """Called when the training batch ends."""
         self._apply_constraint()
